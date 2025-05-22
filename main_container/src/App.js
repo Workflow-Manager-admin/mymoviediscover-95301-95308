@@ -1,36 +1,57 @@
 import React from 'react';
 import './App.css';
+import { MovieProvider } from './context/MovieContext';
+import Header from './components/Header/Header';
+import SearchBar from './components/SearchBar/SearchBar';
+import Filters from './components/Filters/Filters';
+import Recommendations from './components/Recommendations/Recommendations';
+import MovieList from './components/MovieList/MovieList';
+import UserPreferences from './components/UserPreferences/UserPreferences';
 
+/**
+ * Main App component for MyMovieDiscover
+ * @returns {JSX.Element} App component
+ */
 function App() {
   return (
-    <div className="app">
-      <nav className="navbar">
-        <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-            <div className="logo">
-              <span className="logo-symbol">*</span> KAVIA AI
-            </div>
-            <button className="btn">Template Button</button>
-          </div>
-        </div>
-      </nav>
+    <MovieProvider>
+      <div className="app">
+        <Header />
 
-      <main>
-        <div className="container">
-          <div className="hero">
-            <div className="subtitle">AI Workflow Manager Template</div>
-            
-            <h1 className="title">main_container</h1>
-            
-            <div className="description">
-              Start building your application.
+        <main className="main-content">
+          <div className="container">
+            <div className="app-intro">
+              <div>
+                <h1 className="title">MyMovieDiscover</h1>
+                <p className="description">
+                  Discover new movies based on your preferences, track your watch history, and rate your favorites.
+                </p>
+              </div>
+              <UserPreferences />
             </div>
-            
-            <button className="btn btn-large">Button</button>
+
+            <div className="recommendations-section">
+              <Recommendations />
+            </div>
+
+            <div className="movie-browser">
+              <h2 className="section-title">Movie Browser</h2>
+              <SearchBar />
+              <Filters />
+              <MovieList />
+            </div>
           </div>
-        </div>
-      </main>
-    </div>
+        </main>
+
+        <footer className="footer">
+          <div className="container">
+            <div className="footer-content">
+              <p>© {new Date().getFullYear()} MyMovieDiscover | A personalized movie recommendation app</p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </MovieProvider>
   );
 }
 
